@@ -16,6 +16,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import servlet.*;
 
 class TeacherInterface {
@@ -851,13 +852,23 @@ class TeacherInterface {
         JScrollPane scrollPane = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBounds(10, 50, 600, 150);
         //柱状图
+        int fullMark = 100;
+        int temp1 = 0, temp2 = (int) (fullMark * 0.6) - 1;
         DefaultCategoryDataset dataset1 = null;
         dataset1 = new DefaultCategoryDataset();
-        dataset1.addValue(1, "0~10", "");
-        dataset1.addValue(2, "11~20", "");
-        dataset1.addValue(3, "21~30", "");
-        dataset1.addValue(4, "31~40", "");
-        dataset1.addValue(5, "41~50", "");
+        dataset1.addValue(1, "0~" + temp2, "");
+        temp1 = temp2 + 1;
+        temp2 = (int) (fullMark * 0.7) - 1;
+        dataset1.addValue(2, temp1 + "~" + temp2, "");
+        temp1 = temp2 + 1;
+        temp2 = (int) (fullMark * 0.8) - 1;
+        dataset1.addValue(3, temp1 + "~" + temp2, "");
+        temp1 = temp2 + 1;
+        temp2 = (int) (fullMark * 0.9) - 1;
+        dataset1.addValue(4, temp1 + "~" + temp2, "");
+        temp1 = temp2 + 1;
+        temp2 = fullMark;
+        dataset1.addValue(5, temp1 + "~" + temp2, "");
         JFreeChart freeChart = ChartFactory.createBarChart("", // 图表标题
                 "分数/分", // 水平轴的显示标签
                 "人数/人", // 垂直轴的显示标签
@@ -872,14 +883,29 @@ class TeacherInterface {
         chartPanel.setPreferredSize(new java.awt.Dimension(560, 400));
         chartPanel.setSize(605, 355);
         chartPanel.setLocation(10, 205);
+        //饼状图
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        dataset.setValue("不及格", 10);
+        dataset.setValue("及格", 10);
+        JFreeChart chart = ChartFactory.createPieChart("成绩分布比重", // chart title
+                dataset, // data
+                true, // include legend
+                true, false);
+        ChartPanel chartPanel1 = new ChartPanel(chart);
+        chartPanel1.setMouseZoomable(false);
+        chartPanel1.setPreferredSize(new java.awt.Dimension(560, 400));
+        chartPanel1.setSize(280, 300);
+        chartPanel1.setLocation(620, 205);
+
         //
         Container panel0 = dialog.getContentPane();
         panel0.setLayout(null);
         panel0.add(label0);
         panel0.add(scrollPane);
         panel0.add(chartPanel);
+        panel0.add(chartPanel1);
         //
-        dialog.setSize(630, 600);
+        dialog.setSize(930, 600);
         dialog.setLocationRelativeTo(frame1);
         String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
