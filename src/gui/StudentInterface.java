@@ -150,12 +150,6 @@ class StudentInterface {
             }
         };
         JTableHeader jTableHeader = table.getTableHeader();
-        /*TableColumn tableColumn1 = table.getColumnModel().getColumn(3);
-        tableColumn1.setPreferredWidth(50);
-        tableColumn1 = table.getColumnModel().getColumn(1);
-        tableColumn1.setPreferredWidth(50);
-        tableColumn1 = table.getColumnModel().getColumn(2);
-        tableColumn1.setPreferredWidth(30);*/
         jTableHeader.setFont(font1);
         jTableHeader.setResizingAllowed(false);
         jTableHeader.setReorderingAllowed(false);

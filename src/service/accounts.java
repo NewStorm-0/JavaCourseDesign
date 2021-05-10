@@ -4,7 +4,7 @@ import entity.*;
 import java.sql.Connection;
 
 public interface accounts {
-     String password = "Aa20110728";
+     String password = "2456601397";
      int studentregister(students students) throws Exception;
      int teacherregister(teacher teacher) throws Exception;
      students studentsign(students students) throws Exception;
