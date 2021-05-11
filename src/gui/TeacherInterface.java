@@ -10,13 +10,24 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Collections;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.ui.TextAnchor;
 import servlet.*;
 
 class TeacherInterface {
@@ -832,7 +843,32 @@ class TeacherInterface {
         label0.setBounds((630 - 370) / 2, 10, 370, 30);
         //成绩表格
         String[] columnNames = new String[]{"排名", "学生名字", "分数"};
-        String[][] examData = new String[][]{{"1", "zjcgg", "88"}, {"2", "zjcjj", "68"}};
+        changedbimpl changedbimpl = new changedbimpl();
+        String[] initialData = changedbimpl.checkclassgrade(Integer.parseInt(task[list_task.getSelectedIndex()]), class_choose.getId());
+        String[][] examData = new String[initialData.length / 2][3];
+        if (initialData.length == 1) {
+
+        } else {
+            for (int i = 0; i < initialData.length; i += 2) {
+                examData[i / 2][1] = initialData[i];
+                examData[i / 2][2] = initialData[i + 1];
+            }
+            for (int m = 0; m < examData.length - 1; m++) {
+                for (int n = 0; n < examData.length - 1 - m; n++) {
+                    if (Integer.parseInt(examData[n][2]) < Integer.parseInt(examData[n + 1][2])) {
+                        String temp = examData[n][1];
+                        examData[n][1] = examData[n + 1][1];
+                        examData[n + 1][1] = temp;
+                        temp = examData[n][2];
+                        examData[n][2] = examData[n + 1][2];
+                        examData[n + 1][2] = temp;
+                    }
+                }
+            }
+            for (int i = 0; i < examData.length; i++) {
+                examData[i][0] = String.valueOf(i + 1);
+            }
+        }
         JTable table = new JTable(examData, columnNames) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -852,23 +888,39 @@ class TeacherInterface {
         JScrollPane scrollPane = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBounds(10, 50, 600, 150);
         //柱状图
-        int fullMark = 100;
-        int temp1 = 0, temp2 = (int) (fullMark * 0.6) - 1;
+        int fullMark = changedbimpl.checktaskpaper(class_choose.getId(), Integer.parseInt(task[list_task.getSelectedIndex()])).getPaperpoint();
+        int[][] bound = new int[5][2];
+        bound[0][0] = 0;
+        bound[0][1] = (int) (fullMark * 0.6) - 1;
+        for (int i = 1; i < bound.length - 1; i++) {
+            bound[i][0] = bound[i - 1][1] + 1;
+            bound[i][1] = (fullMark * (i + 6) / 10) - 1;
+        }
+        bound[4][0] = bound[3][1] + 1;
+        bound[4][1] = fullMark;
+        int[] number = new int[]{0, 0, 0, 0, 0};
+        for (int i = 0; i < examData.length; i++) {
+            if (Integer.parseInt(examData[i][2]) >= bound[0][0] && Integer.parseInt(examData[i][2]) <= bound[0][1]) {
+                number[0]++;
+            } else if (Integer.parseInt(examData[i][2]) >= bound[1][0] && Integer.parseInt(examData[i][2]) <= bound[1][1]) {
+                number[1]++;
+            } else if (Integer.parseInt(examData[i][2]) >= bound[2][0] && Integer.parseInt(examData[i][2]) <= bound[2][1]) {
+                number[2]++;
+            } else if (Integer.parseInt(examData[i][2]) >= bound[3][0] && Integer.parseInt(examData[i][2]) <= bound[3][1]) {
+                number[3]++;
+            } else if (Integer.parseInt(examData[i][2]) >= bound[4][0] && Integer.parseInt(examData[i][2]) <= bound[4][1]) {
+                number[4]++;
+            } else {
+                JOptionPane.showMessageDialog(frame1, "数据跑出了区间外");
+            }
+        }
         DefaultCategoryDataset dataset1 = null;
         dataset1 = new DefaultCategoryDataset();
-        dataset1.addValue(1, "0~" + temp2, "");
-        temp1 = temp2 + 1;
-        temp2 = (int) (fullMark * 0.7) - 1;
-        dataset1.addValue(2, temp1 + "~" + temp2, "");
-        temp1 = temp2 + 1;
-        temp2 = (int) (fullMark * 0.8) - 1;
-        dataset1.addValue(3, temp1 + "~" + temp2, "");
-        temp1 = temp2 + 1;
-        temp2 = (int) (fullMark * 0.9) - 1;
-        dataset1.addValue(4, temp1 + "~" + temp2, "");
-        temp1 = temp2 + 1;
-        temp2 = fullMark;
-        dataset1.addValue(5, temp1 + "~" + temp2, "");
+        dataset1.addValue(number[0], "0~" + bound[0][1] + "(59%)", "");
+        dataset1.addValue(number[1], bound[1][0] + "~" + bound[1][1] + "(69%)", "");
+        dataset1.addValue(number[2], bound[2][0] + "~" + bound[2][1] + "(79%)", "");
+        dataset1.addValue(number[3], bound[3][0] + "~" + bound[3][1] + "(89%)", "");
+        dataset1.addValue(number[4], bound[4][0] + "~" + bound[4][1] + "(100%)", "");
         JFreeChart freeChart = ChartFactory.createBarChart("", // 图表标题
                 "分数/分", // 水平轴的显示标签
                 "人数/人", // 垂直轴的显示标签
@@ -878,6 +930,15 @@ class TeacherInterface {
                 false, // 是否显示提示
                 false// 是否生成URL连接
         );
+        CategoryPlot plot = (CategoryPlot) freeChart.getCategoryPlot();
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        //显示条目标签
+        renderer.setBaseItemLabelsVisible(true);
+        //设置条目标签生成器,在JFreeChart1.0.6之前可以通过renderer.setItemLabelGenerator(CategoryItemLabelGenerator generator)方法实现，但是从版本1.0.6开始有下面方法代替
+        renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+        //设置条目标签显示的位置,outline表示在条目区域外,baseline_center表示基于基线且居中
+        renderer.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.BASELINE_CENTER));
+        renderer.setBaseItemLabelFont(font1);
         ChartPanel chartPanel = new ChartPanel(freeChart);
         chartPanel.setMouseZoomable(false);
         chartPanel.setPreferredSize(new java.awt.Dimension(560, 400));
@@ -885,8 +946,11 @@ class TeacherInterface {
         chartPanel.setLocation(10, 205);
         //饼状图
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("不及格", 10);
-        dataset.setValue("及格", 10);
+        dataset.setValue("60%以下", number[0]);
+        dataset.setValue("60%~69%", number[1]);
+        dataset.setValue("70%~79%", number[2]);
+        dataset.setValue("80%~89%", number[3]);
+        dataset.setValue("90%~100%", number[4]);
         JFreeChart chart = ChartFactory.createPieChart("成绩分布比重", // chart title
                 dataset, // data
                 true, // include legend
@@ -896,7 +960,11 @@ class TeacherInterface {
         chartPanel1.setPreferredSize(new java.awt.Dimension(560, 400));
         chartPanel1.setSize(280, 300);
         chartPanel1.setLocation(620, 205);
-
+        PiePlot pieplot = (PiePlot) chart.getPlot(); //通过JFreeChart 对象获得
+        pieplot.setNoDataMessage("无数据可供显示！"); // 没有数据的时候显示的内容
+        pieplot.setLabelGenerator(new StandardPieSectionLabelGenerator(
+                ("{0}: ({2})"), NumberFormat.getNumberInstance(),
+                new DecimalFormat("0.00%")));
         //
         Container panel0 = dialog.getContentPane();
         panel0.setLayout(null);

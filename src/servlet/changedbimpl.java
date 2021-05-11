@@ -18,6 +18,27 @@ public class changedbimpl implements changedb{
     private choicequestionDone[] choicequestionDone;
     private answerquestionDone[] answerquestionDone;
     private judgequestionDone[] judgequestionDone;
+    public String[] checkclassgrade(int taskid, int classid) {
+        try {
+            Socket client = new Socket(InetAddress.getLocalHost(), 9999);
+            OutputStream out = client.getOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(out);
+            Request req = new Request();//需要建立Request类，包含方法类型和参数等，序列化发送
+            req.setClassName("service.checkDBimpl");// 全类名
+            req.setMethodName("checkclassgrade");//客户端发出指令
+            req.setParameterTypes(new Class[]{int.class,int.class});
+            req.setParameterValues(new Object[]{taskid,classid});
+            oos.writeObject(req);//使用Object输出流发送 Request
+            InputStream in = client.getInputStream();
+            ObjectInputStream ois = new ObjectInputStream(in);
+            String s = (String) ois.readObject();
+            oos.close();
+            out.close();
+            client.close();
+            String[] strings=s.split(" ");
+            return strings;}catch(Exception e){e.printStackTrace();
+            return null;}
+    }
     public String checkstudentname(int studentid){
         try {
             Socket client = new Socket(InetAddress.getLocalHost(), 9999);
@@ -78,6 +99,8 @@ public class changedbimpl implements changedb{
             client.close();
             String[] strings=s.split(" ");
             String s1="";
+            if(strings[0].equals(""))
+                    return null;
             for(int i=0;i<strings.length;i++){
                 Socket client1 = new Socket(InetAddress.getLocalHost(), 9999);
                 OutputStream out1 = client1.getOutputStream();

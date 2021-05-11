@@ -150,8 +150,8 @@ class StudentInterface {
         } else {
             for (int i = 0; i < initialData.length; i += 3) {
                 examData[i / 3][0] = initialData[i];
-                examData[i / 3][1] = initialData[i + 1];
-                examData[i / 3][2] = initialData[i + 2];
+                examData[i / 3][1] = initialData[i + 2];
+                examData[i / 3][2] = initialData[i + 1];
             }
         }
         JTable table = new JTable(examData, columnNames) {
