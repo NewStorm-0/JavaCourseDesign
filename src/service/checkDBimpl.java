@@ -2,9 +2,8 @@ package service;
 
 import entity.*;
 import dao.daoimpl;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
+import java.sql.*;
 
 public class checkDBimpl implements checkDB{
     private Connection connection;
@@ -89,6 +88,10 @@ public class checkDBimpl implements checkDB{
         rules[] rules=daoimpl.searchrules(searchstring);
         return rules[i];
     }
+    public String checktestdoneforstudent(int studentid){
+        daoimpl daoimpl=new daoimpl(connection);
+        return daoimpl.checktestdoneforstudent(studentid);
+        }
     public testpaper checktaskpaper(int classid,int taskid){
         daoimpl daoimpl=new daoimpl(connection);
         return daoimpl.checktaskpaper(classid,taskid);

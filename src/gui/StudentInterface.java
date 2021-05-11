@@ -141,8 +141,19 @@ class StudentInterface {
         button2.addActionListener(buttonListener1);
         button2.setBounds(260, 10, 100, 50);
         //JTable初始化
+        changedbimpl changedbimpl = new changedbimpl();
+        String[] initialData = changedbimpl.checktestdoneforstudent(student.getId());
         String[] columnNames = new String[]{"考试名称", "你的得分", "试卷总分"};
-        String[][] examData = new String[][]{{"考试一", "80", "100"}, {"考试二", "805", "1000"}};
+        String[][] examData = new String[initialData.length / 3][3];
+        if (initialData.length == 1) {
+            //examData = new String[][]{{"暂无", "暂无", "暂无"}};
+        } else {
+            for (int i = 0; i < initialData.length; i += 3) {
+                examData[i / 3][0] = initialData[i];
+                examData[i / 3][1] = initialData[i + 1];
+                examData[i / 3][2] = initialData[i + 2];
+            }
+        }
         JTable table = new JTable(examData, columnNames) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
