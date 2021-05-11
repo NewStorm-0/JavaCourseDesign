@@ -1270,7 +1270,7 @@ class TeacherInterface {
     private class NewThread1 extends Thread {
         @Override
         public void run() {
-            addQuestionInterface = new AddQuestionInterface(teacher, jList1, TeacherInterface.this.radioButton1);
+            addQuestionInterface = new AddQuestionInterface(teacher, jList1, TeacherInterface.this.radioButton1, TeacherInterface.this);
         }
     }
 

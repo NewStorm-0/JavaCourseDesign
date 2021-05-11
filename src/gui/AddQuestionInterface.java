@@ -36,11 +36,13 @@ class AddQuestionInterface {
     private final teacher teacher;
     private final JList<String> jList;
     private final JRadioButton is;
+    private final TeacherInterface teacherInterface;
 
-    AddQuestionInterface(teacher teacher, JList<String> jList, JRadioButton is) {
+    AddQuestionInterface(teacher teacher, JList<String> jList, JRadioButton is, TeacherInterface ti) {
         this.teacher = teacher;
         this.jList = jList;
         this.is = is;
+        teacherInterface = ti;
         initializeInterface();
     }
 
@@ -312,6 +314,7 @@ class AddQuestionInterface {
     }
 
     private void refreshQuestions() {
+        teacherInterface.getTestQuestionCatalog();
         changedbimpl changedbimpl = new changedbimpl();
         question[] questions = changedbimpl.checkquestion();
         String[] strings = new String[questions.length];
