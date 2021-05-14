@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 
 public class TestInterface {
     private JFrame frame1;
@@ -119,7 +120,7 @@ public class TestInterface {
             }
         });
         changeQuestion(0);
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         frame1.setIconImage(icon.getImage());
         frame1.setDefaultLookAndFeelDecorated(true);
@@ -172,7 +173,7 @@ public class TestInterface {
         button_submit.setFocusPainted(false);
         button_exit.setFocusPainted(false);
         //计时标签初始化
-        String iconPath_time = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/time.jpg";
+        String iconPath_time = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/time.jpg";
         ImageIcon icon_time = new ImageIcon(iconPath_time);
         Image img = icon_time.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         label_time.setIcon(new ImageIcon(img));

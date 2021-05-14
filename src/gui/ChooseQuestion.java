@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 class ChooseQuestion {
     private JDialog frame1;
@@ -38,7 +39,7 @@ class ChooseQuestion {
             e.printStackTrace();
         }
         frame1 = new JDialog(parentFrame, "卷-添加" + form, true);
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         font1 = new Font("Microsoft YaHei UI", Font.PLAIN, 15);
         panel1 = frame1.getContentPane();
@@ -61,7 +62,7 @@ class ChooseQuestion {
         textField1.setFont(font1);
         textField1.setBounds(10, 10, 219, 30);
         //搜索按钮初始化
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/search.jpg";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/search.jpg";
         ImageIcon icon = new ImageIcon(iconPath);
         Image img = icon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         buttonSearch.setIcon(new ImageIcon(img));

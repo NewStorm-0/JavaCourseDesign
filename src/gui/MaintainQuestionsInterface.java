@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 class MaintainQuestionsInterface {
     private final JFrame frame;
@@ -78,7 +79,7 @@ class MaintainQuestionsInterface {
     }
 
     private void initializeFrame() {
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         frame.setIconImage(icon.getImage());
         frame.setSize(650, 450);

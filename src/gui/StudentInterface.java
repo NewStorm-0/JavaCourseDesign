@@ -11,6 +11,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
 
 class StudentInterface {
     private final students student;
@@ -56,7 +57,8 @@ class StudentInterface {
         }
         frame1 = new JFrame("卷");
         panel0 = frame1.getContentPane();
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath;
+        iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         font1 = new Font("Microsoft YaHei UI", Font.PLAIN, 15);
         buttonListener1 = new JButtonListener();
@@ -245,7 +247,7 @@ class StudentInterface {
         label1.setBounds(310, 10, 200, 25);
         JLabel label2 = new JLabel("班级任务列表  当前查看班级：无");
         label2.setFont(font1);
-        label2.setSize(240, 25);
+        label2.setSize(280, 25);
         label2.setLocation((700 - label2.getWidth() - 115) / 2 + 115, 155);
         //返回按钮初始化
         JButton buttonBack = new JButton("返 回");
@@ -364,7 +366,7 @@ class StudentInterface {
         panel.add(scrollPane);
         panel.add(button);
         //
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         dialog_chooseExam.setFont(font1);
         dialog_chooseExam.setSize(635, 240);
@@ -382,7 +384,7 @@ class StudentInterface {
             e.printStackTrace();
         }
         dialog_joinClass = new JDialog(frame1, "加入班级", true);
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         Container panelThis = dialog_joinClass.getContentPane();
         JLabel label1 = new JLabel("班级名称：");
@@ -610,6 +612,14 @@ class StudentInterface {
         @Override
         public void run() {
             MaintainQuestionsInterface maintainQuestionsInterface = new MaintainQuestionsInterface(questions[jList1.getSelectedIndex()]);
+        }
+    }
+
+    private class defect {
+        private int z = 0;
+
+        defect() {
+
         }
     }
 

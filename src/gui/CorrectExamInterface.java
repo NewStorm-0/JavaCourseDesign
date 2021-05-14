@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 
 class CorrectExamInterface {
 
@@ -92,7 +93,7 @@ class CorrectExamInterface {
             }
         });
         changeQuestion(0);
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         frame1.setIconImage(icon.getImage());
         frame1.setDefaultLookAndFeelDecorated(true);

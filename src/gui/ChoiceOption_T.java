@@ -70,6 +70,10 @@ class ChoiceOption_T {
             textAreas.remove(i - 1);
             scrollPanes.remove(i - 1);
         }
+        radioButtons.get(0).setSelected(false);
+        radioButtons.get(1).setSelected(false);
+        textAreas.get(0).setText("");
+        textAreas.get(1).setText("");
         position = 1;
         y1 = 45;
         y2 = 5;

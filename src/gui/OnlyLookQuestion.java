@@ -6,6 +6,7 @@ import entity.question;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 class OnlyLookQuestion {
     private final JFrame frame;
@@ -45,7 +46,7 @@ class OnlyLookQuestion {
     }
 
     private void initializeFrame() {
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         frame.setIconImage(icon.getImage());
         frame.setSize(650, 450);

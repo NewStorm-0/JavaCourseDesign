@@ -13,6 +13,7 @@ import java.awt.event.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collections;
+import java.util.Objects;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -99,7 +100,7 @@ class TeacherInterface {
         }
         frame1 = new JFrame("卷");
         panel0 = frame1.getContentPane();
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         font1 = new Font("Microsoft YaHei UI", Font.PLAIN, 15);
         buttonListener1 = new JButtonListener();
@@ -650,7 +651,7 @@ class TeacherInterface {
         }
         dialog_chooseRule = new JDialog(frame1, "选择组卷规则", true);
         comboBox_chooseRule = new JComboBox<>();
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         Container panel_fcr = dialog_chooseRule.getContentPane();
         JLabel label_fcr = new JLabel("试卷生成规则");
@@ -694,7 +695,7 @@ class TeacherInterface {
         }
         dialog_chooseExam = new JDialog(frame1, "选择试卷", true);
         comboBox_chooseExam = new JComboBox<>();
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         Container panel_fce = dialog_chooseExam.getContentPane();
         JLabel label_fce = new JLabel("试卷");
@@ -738,7 +739,7 @@ class TeacherInterface {
         }
         dialog_chooseExam = new JDialog(frame1, "选择试卷", true);
         comboBox_chooseExam = new JComboBox<>();
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         Container panel_fce = dialog_chooseExam.getContentPane();
         JLabel label_fce = new JLabel("试卷：");
@@ -797,7 +798,7 @@ class TeacherInterface {
             e.printStackTrace();
         }
         dialog_addClass = new JDialog(frame1, "创建班级", true);
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         Container panelThis = dialog_addClass.getContentPane();
         JLabel label1 = new JLabel("班级名称：");
@@ -975,7 +976,7 @@ class TeacherInterface {
         //
         dialog.setSize(930, 600);
         dialog.setLocationRelativeTo(frame1);
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         dialog.setIconImage(icon.getImage());
         dialog.setDefaultLookAndFeelDecorated(true);
@@ -1067,7 +1068,7 @@ class TeacherInterface {
         panel.add(textField_testName);
         panel.add(button);
         //
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         dialog_inputName.setIconImage(icon.getImage());
         dialog_inputName.setSize(370, 90);
@@ -1422,6 +1423,14 @@ class TeacherInterface {
                     y += 46;
                 }
             }
+        }
+    }
+
+    private class defect {
+        private int z = 0;
+
+        defect() {
+
         }
     }
 

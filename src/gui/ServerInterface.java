@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Objects;
 
 public class ServerInterface {
     private JFrame frame1;
@@ -19,7 +20,7 @@ public class ServerInterface {
         frame1 = new JFrame("卷——服务端");
         frame1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 5));
         Container panel = frame1.getContentPane();
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         //
         JLabel label1 = new JLabel("服务器状态：");

@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 class SearchInterface {
     private JFrame frame1;
@@ -43,7 +44,7 @@ class SearchInterface {
             e.printStackTrace();
         }
         frame1 = new JFrame("卷-搜索");
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         font1 = new Font("Microsoft YaHei UI", Font.PLAIN, 15);
         panel0 = frame1.getContentPane();
@@ -67,7 +68,7 @@ class SearchInterface {
             e.printStackTrace();
         }
         frame1 = new JFrame("卷——搜索");
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         font1 = new Font("Microsoft YaHei UI", Font.PLAIN, 15);
         panel0 = frame1.getContentPane();
@@ -92,7 +93,7 @@ class SearchInterface {
         textField1.setFont(font1);
         textField1.setBounds(10, 10, 200, 30);
         //搜索按钮初始化
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/search.jpg";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/search.jpg";
         ImageIcon icon = new ImageIcon(iconPath);
         Image img = icon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         buttonSearch.setIcon(new ImageIcon(img));
@@ -135,7 +136,7 @@ class SearchInterface {
         textField1.setFont(font1);
         textField1.setBounds(10, 10, 200, 30);
         //搜索按钮初始化
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/search.jpg";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/search.jpg";
         ImageIcon icon = new ImageIcon(iconPath);
         Image img = icon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         buttonSearch.setIcon(new ImageIcon(img));
@@ -198,7 +199,7 @@ class SearchInterface {
     private class JButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (comboBox.getSelectedItem().equals("试题")) {
+            if (Objects.equals(comboBox.getSelectedItem(), "试题")) {
                 try {
                     String searchstring = textField1.getText();
                     if (searchstring.equals("")) {
@@ -212,7 +213,7 @@ class SearchInterface {
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
-            } else if (comboBox.getSelectedItem().equals("组卷规则")) {
+            } else if (Objects.equals(comboBox.getSelectedItem(), "组卷规则")) {
                 try {
                     String searchstring = textField1.getText();
                     if (searchstring.equals("")) {

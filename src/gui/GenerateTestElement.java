@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 class GenerateTestElement {
     private final Font font1 = new Font("Microsoft YaHei UI", Font.PLAIN, 15);
@@ -103,7 +104,7 @@ class GenerateTestElement {
             JButton button = new JButton();
             button.setActionCommand("add" + i);
             button.setBounds(5, y, 30, 30);
-            String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/add.jpg";
+            String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/add.jpg";
             ImageIcon icon = new ImageIcon(iconPath);
             Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
             button.setIcon(new ImageIcon(img));

@@ -8,6 +8,7 @@ import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 
 class AddQuestionInterface {
@@ -96,7 +97,7 @@ class AddQuestionInterface {
         label2.setBounds(1, 0, 634, 24);
         label2.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         //
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         frame1.setSize(650, 450);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -399,6 +400,18 @@ class AddQuestionInterface {
                         changedbimpl.addquestion();
                         JOptionPane.showMessageDialog(null, "提交成功");
                         refreshQuestions();
+                        textArea1.setText("");
+                        textField1.setText("0.5");
+                        dimension1.setSize(493, 200);
+                        panel1_A.setPreferredSize(dimension1);
+                        System.out.println(choiceOption_T.getSize());
+                        for (int i = choiceOption_T.getSize() - 1; i > 1; i--) {
+                            panel1_A.remove(choiceOption_T.radioButtons.get(i));
+                            panel1_A.remove(choiceOption_T.scrollPanes.get(i));
+                        }
+                        choiceOption_T.clearOption();
+                        jScrollPane1.revalidate();
+                        jScrollPane1.repaint();
                         frame1.dispose();
                     } catch (NumberFormatException numberFormatException) {
                         JOptionPane.showMessageDialog(null, "输入的难度系数格式错误");
@@ -420,6 +433,8 @@ class AddQuestionInterface {
                             changedbimpl.addquestion();
                             JOptionPane.showMessageDialog(null, "提交成功");
                             refreshQuestions();
+                            textArea2.setText("");
+                            textField2.setText("");
                             frame1.dispose();
                         } else if (radioButton2_B.isSelected()) {
                             answer = 0;
@@ -428,6 +443,8 @@ class AddQuestionInterface {
                             changedbimpl.addquestion();
                             JOptionPane.showMessageDialog(null, "提交成功");
                             refreshQuestions();
+                            textArea2.setText("");
+                            textField2.setText("0.50");
                             frame1.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "请选择正确答案");
@@ -450,6 +467,9 @@ class AddQuestionInterface {
                         changedbimpl.addquestion();
                         JOptionPane.showMessageDialog(null, "提交成功");
                         refreshQuestions();
+                        textArea3.setText("");
+                        textArea4.setText("");
+                        textField3.setText("0.5");
                         frame1.dispose();
                     } catch (NumberFormatException numberFormatException) {
                         JOptionPane.showMessageDialog(null, "输入的难度系数格式错误");

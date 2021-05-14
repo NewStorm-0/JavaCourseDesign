@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 class RuleInterface {
     private JFrame frame1; //主界面
@@ -109,7 +110,7 @@ class RuleInterface {
         panel1.add(label5);
         panel1.add(button1);
         //frame1主界面初始化
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         ImageIcon icon = new ImageIcon(iconPath);
         frame1.setSize(240, 260);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

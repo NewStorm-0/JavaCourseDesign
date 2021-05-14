@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Objects;
 
 public class MainInterface {
     private JFrame frame1;
@@ -40,7 +41,7 @@ public class MainInterface {
 
     private void initializeWindow() {
         window = new JWindow();
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/a.jpg";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/a.jpg";
         ImageIcon happyPng = new ImageIcon(iconPath);
         Image img = happyPng.getImage().getScaledInstance(350, 200, Image.SCALE_SMOOTH);
         JLabel label0 = new JLabel(new ImageIcon(img));
@@ -56,7 +57,7 @@ public class MainInterface {
     private void initializeFrame1() {
         frame1 = new JFrame("卷");
         Container panel = frame1.getContentPane();
-        String iconPath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/aa.png";
+        String iconPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/aa.png";
         icon = new ImageIcon(iconPath);
         JLabel label1 = new JLabel("账户：");
         JLabel label2 = new JLabel("密码：");
@@ -67,19 +68,19 @@ public class MainInterface {
         JButton button1 = new JButton("教师账号登录");
         JButton button2 = new JButton("学生账号登录");
         //背景图片
-        String picturePath = this.getClass().getClassLoader().getResource("").getPath() + "../../../../first soft/material/001.jpg";
+        String picturePath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("")).getPath() + "../../../../first soft/material/001.jpg";
         ImageIcon happyPng = new ImageIcon(picturePath);
         Image img = happyPng.getImage().getScaledInstance(550, 350, Image.SCALE_SMOOTH);
         JLabel label0 = new JLabel(new ImageIcon(img));
         label0.setSize(550, 350);
         label0.setLocation(0, 0);
         //用户名输入框
-        textField1 = new JTextField("卷神");
+        textField1 = new JTextField();
         textField1.setFont(font1);
         textField1.setBounds(205, 52, 176, 25);
         textField1.setOpaque(false);
         //密码输入框
-        passwordField1 = new JPasswordField("1234567");
+        passwordField1 = new JPasswordField();
         passwordField1.setBounds(204, 102, 176, 26);
         passwordField1.setFont(font2);
         passwordField1.setOpaque(false);
@@ -207,8 +208,6 @@ public class MainInterface {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (radioButton1.isSelected()) {
-                textField1.setText("男神");
-                passwordField1.setText("wangzhongwang");
                 MainInterface.this.passwordField1.setEchoChar((char) 0);
             } else {
                 MainInterface.this.passwordField1.setEchoChar('•');
